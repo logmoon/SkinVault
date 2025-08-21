@@ -1,4 +1,7 @@
 # SkinVault
+
+![logo](icon.png)
+
 A simple CS2 inventory item prices tracker that helps you track your CS2 item investments and monitor their performance over time.
 
 Price data is sourced from the Steam Market, we also account for the Steam tax.
@@ -14,9 +17,16 @@ There are a lot of websites and tools that do this way better ([Pricempire](http
 # Usage
 As stated above, this is only meant to run locally, so clone the repo, `cd` into it, `npm install`, and `npm run dev`. Can't get easier than that.
 
+# Screenshots
+![dashboard](images/dashboard.png)
+![items](images/items.png)
+![add](images/add.png)
+![settings](images/settings.png)
+
 # Credits (aka the goats)
 - [steam-item-name-ids by somespecialone](https://github.com/somespecialone/steam-item-name-ids)
 - [CSGO-API by ByMykel](https://github.com/ByMykel/CSGO-API)
 - [This post helped me approximate steam's seller cut](https://steamcommunity.com/sharedfiles/filedetails/?id=824580865)
+- The coding clankers
 
 Thank you for helping me figure this out!
