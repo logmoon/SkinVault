@@ -28,5 +28,3 @@ As stated above, this is only meant to run locally, so clone the repo, `cd` into
 - [CSGO-API by ByMykel](https://github.com/ByMykel/CSGO-API)
 - [This post helped me approximate steam's seller cut](https://steamcommunity.com/sharedfiles/filedetails/?id=824580865)
 - The coding clankers
-
-Thank you for helping me figure this out!
