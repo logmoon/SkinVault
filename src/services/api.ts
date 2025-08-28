@@ -2,15 +2,13 @@ import axios from "axios";
 import { DatabaseItem } from "../types";
 
 // CS2 API base URL for item data
-const CS2_API_BASE =
-  "https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/en";
+const ITEMS_API_BASE = "/items";
 
-// Steam marketplace base URL (proxied through your dev server)
-const API_BASE = "/steam-api";
+// Steam marketplace base URL
+const STEAM_API_BASE = "/steam-api";
 
 // Mapping of hash_name → nameid
-const NAME_ID_JSON_URL =
-  "https://raw.githubusercontent.com/somespecialone/steam-item-name-ids/refs/heads/master/data/cs2.json";
+const NAME_ID_API_BASE = "/name-id";
 
 /**
  * Estimate seller's cut on a Steam sale.
@@ -51,7 +49,7 @@ class CS2APIService {
     }
 
     try {
-      const response = await axios.get(`${CS2_API_BASE}/all.json`);
+      const response = await axios.get(`${ITEMS_API_BASE}/all.json`);
       this.itemsCache = response.data;
       this.lastCacheTime = now;
       return this.itemsCache;
@@ -72,7 +70,7 @@ class CS2APIService {
     }
 
     try {
-      const response = await axios.get(NAME_ID_JSON_URL);
+      const response = await axios.get(NAME_ID_API_BASE);
       this.nameIdCache = response.data;
       this.lastNameIdCacheTime = now;
       return this.nameIdCache || {};
@@ -96,7 +94,7 @@ class CS2APIService {
   // Get Steam marketplace price data
   private async getSteamItemPriceData(itemNameId: string) {
     try {
-      const response = await axios.get(`${API_BASE}/market/itemordershistogram`, {
+      const response = await axios.get(`${STEAM_API_BASE}/market/itemordershistogram`, {
         params: {
           country: "US",
           language: "english",
@@ -130,6 +128,7 @@ class CS2APIService {
   async searchItems(query: string): Promise<DatabaseItem[]> {
     try {
       const allItems = await this.getAllItems();
+      console.log('Got items', allItems);
       const items = Object.values(allItems);
 
       const filteredItems = items.filter(
