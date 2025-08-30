@@ -66,6 +66,22 @@ const ItemList: React.FC<ItemListProps> = ({ items, onRemove, onUpdate }) => {
     }
   };
 
+  const getPricempireUrl = (hashName: string) => {
+    if (!hashName) return '#';
+    
+    const exteriorMatch = hashName.match(/\(([^)]+)\)$/);
+    const exterior = exteriorMatch ? exteriorMatch[1] : 'Factory New';
+    
+    const nameWithoutExterior = hashName.replace(/\s*\([^)]+\)$/, '');
+    const parts = nameWithoutExterior.split(' | ');
+    const weapon = parts[0] || '';
+    const skin = parts[1] || '';
+    
+    const formatForUrl = (str: string) => str.toLowerCase().replace(/\s+/g, '-');
+    
+    return `https://app.pricempire.com/item/cs2/skin/${formatForUrl(weapon)}/${formatForUrl(skin)}/${formatForUrl(exterior)}`;
+  };
+
   const getRecommendation = (item: PurchasedItem) => {
     if (shouldSell(item)) {
       return { text: 'Consider Selling', color: 'text-green-400', icon: TrendingUp };
@@ -202,9 +218,8 @@ const ItemList: React.FC<ItemListProps> = ({ items, onRemove, onUpdate }) => {
 
                 {/* Actions */}
                 <div className="flex items-center justify-between pt-4 border-t border-border-primary">
-                  {item.marketUrl && (
                     <a
-                      href={item.marketUrl}
+                      href={`https://steamcommunity.com/market/listings/730/${encodeURIComponent(item.hashName)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center space-x-1 text-sm text-accent-primary hover:text-accent-secondary transition-colors duration-200"
@@ -212,8 +227,15 @@ const ItemList: React.FC<ItemListProps> = ({ items, onRemove, onUpdate }) => {
                       <ExternalLink size={14} />
                       <span>View on Steam Marketplace</span>
                     </a>
-                  )}
-                  
+                    <a
+                      href={getPricempireUrl(item.hashName)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-1 text-sm text-accent-primary hover:text-accent-secondary transition-colors duration-200"
+                    >
+                      <ExternalLink size={14} />
+                      <span>View on Pricempire</span>
+                    </a>
                   <div className="flex items-center space-x-1 text-xs text-text-secondary">
                     <Calendar size={12} />
                     <span>{format(new Date(item.buyDate), 'MMM dd')}</span>

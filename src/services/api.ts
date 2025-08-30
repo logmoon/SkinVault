@@ -158,6 +158,7 @@ class CS2APIService {
           image: item.image || "",
           rarity: item.rarity?.name || "Unknown",
           rarityColor: item.rarity?.color || "#666666",
+          exterior: item.exterior || "Unknown",
           type: item.weapon?.name || item.category?.name || "Unknown",
         });
       }

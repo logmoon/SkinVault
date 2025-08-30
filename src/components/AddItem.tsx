@@ -147,7 +147,6 @@ const AddItem: React.FC<AddItemProps> = ({ onAdd, loading }) => {
         buyPrice: formData.buyPrice,
         buyDate: formData.buyDate,
         imageUrl: selectedItem?.image,
-        marketUrl: `https://steamcommunity.com/market/listings/730/${encodeURIComponent(formData.hashName)}`,
       };
 
       const success = await onAdd(itemData);

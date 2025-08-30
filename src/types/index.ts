@@ -11,7 +11,6 @@ export interface PurchasedItem {
   currentPrice?: number;
   priceHistory: PricePoint[];
   imageUrl?: string;
-  marketUrl?: string;
 }
 
 export interface PricePoint {
